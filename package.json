@@ -1,0 +1,29 @@
+{
+  "name": "icetray",
+  "version": "1.0.0",
+  "description": "IceTray is simple tool to transform raw data to schema, and sanitize data type",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha tests/**/*.js --timeout 5000 --exit"
+  },
+  "keywords": [
+    "icetray",
+    "parser",
+    "data",
+    "object",
+    "morphism",
+    "structure",
+    "data-mapper",
+    "map",
+    "mapper",
+    "schema",
+    "model",
+    "entity",
+    "domain"
+  ],
+  "author": "CodeBanBan",
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "^6.1.4"
+  }
+}
