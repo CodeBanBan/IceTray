@@ -23,6 +23,10 @@
   ],
   "author": "CodeBanBan",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CodeBanBan/IceTray"
+  },
   "devDependencies": {
     "mocha": "^6.1.4"
   }
