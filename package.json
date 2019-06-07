@@ -1,6 +1,6 @@
 {
   "name": "icetray",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "IceTray is simple tool to transform raw data to schema, and sanitize data type",
   "main": "index.js",
   "scripts": {
@@ -23,6 +23,7 @@
   ],
   "author": "CodeBanBan",
   "license": "MIT",
+  "homepage": "https://github.com/CodeBanBan/IceTray",
   "repository": {
     "type": "git",
     "url": "https://github.com/CodeBanBan/IceTray"

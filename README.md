@@ -1,11 +1,14 @@
-## Getting Started
+## IceTray
+IceTray is simple tool to transform raw data to schema, and sanitize data type
 
-####Installation
+### Getting Started
+
+#### Installation
 ```
 $ npm i icetray
 ```
 
-####Example
+#### Example
 ```js
 const IceTray = require('icetray');
 
@@ -33,7 +36,7 @@ const cat = IceTray(CatSchema, rawData)
 */
 ```
 
-####Simple Schema Design
+#### Simple Schema Design
 ##### Type Support
 - String `return data type String`
 - Number `return data type Number`
