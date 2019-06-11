@@ -1,6 +1,6 @@
 'use strict'
 
-const assert = require('assert');
+const assert = require('chai').assert
 const IceTray = require('../../lib/main')
 
 describe('IceTray Lib: Nested Schema', () => {
@@ -101,6 +101,25 @@ describe('IceTray Lib: Nested Schema', () => {
     assert.strictEqual(profile.name.firstName, 'field-name')
     assert.strictEqual(profile.name.lastName, 'default-lastname')
     assert.strictEqual(profile.age, 35)
+  })
+
+  it('should not return key when row data no key', async () => {
+    const schema = {
+      hobbies: [String],
+      exp: [{
+        title: String,
+        total: Number
+      }]
+    }
+
+    const rawData = {
+      exp: []
+    }
+
+    const result = IceTray(schema, rawData)
+
+    assert.notProperty(result, 'hobbies')
+    assert.strictEqual(result.exp.length, 0)
   })
 
 })
