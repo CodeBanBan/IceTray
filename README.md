@@ -40,6 +40,7 @@ const cat = IceTray(CatSchema, rawData)
 ##### Type Support
 - String `return data type String`
 - Number `return data type Number`
+- Boolean `return data type Boolean`
 - 'default' `return raw data of key` 
 ```js
 const schema = {
@@ -48,6 +49,31 @@ const schema = {
     type: String,
     default: 'Default Value',
     fields: ['map1', 'map2', 'map3']
+  }
+}
+```
+
+#### Nested Schema Design
+```js
+const nestedSchema = {
+  // Array of value
+  key1: [String],
+  
+  // Array of Object
+  key2: [{
+    subKey1: String,
+    subKey2: Number,
+    subKey3: {
+      type: String,
+      fields: ['sk3', 'key3'],
+      default: 'default-value'
+    }
+  }],
+  
+  // Object
+  key3: {
+    subKey1: String,
+    subKey2: Number
   }
 }
 ```
