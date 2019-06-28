@@ -1,6 +1,6 @@
 {
   "name": "icetray",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "IceTray is simple tool to transform raw data to schema, and sanitize data type",
   "main": "index.js",
   "scripts": {

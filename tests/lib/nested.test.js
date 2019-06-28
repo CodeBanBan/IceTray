@@ -122,4 +122,22 @@ describe('IceTray Lib: Nested Schema', () => {
     assert.strictEqual(result.exp.length, 0)
   })
 
+  it('should not return key not exist', async () => {
+    const schema = {
+      username: String,
+      profile: {
+        firstName: String,
+        lastName: String
+      }
+    }
+
+    const rawData = {
+      username: 'demo'
+    }
+
+    const result = IceTray(schema, rawData)
+
+    assert.strictEqual(result.username, 'demo')
+    assert.notProperty(result, 'profile')
+  })
 })
