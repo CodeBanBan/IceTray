@@ -54,7 +54,7 @@ describe('IceTray Lib', () => {
     assert.strictEqual(data.number, 0)
   })
 
-  it('should be return value from map fields', async () => {
+  it('should be return value from same key', async () => {
     const schema = {
       string: { type: String, fields: ['s', 'st', 'str'] },
       number: { type: Number, fields: 'num' }
@@ -64,6 +64,26 @@ describe('IceTray Lib', () => {
       string: 'original-string',
       st: 'from-fields-st',
       number: 999,
+      num: 555
+    }
+
+    const data = IceTray(schema, rawData)
+
+    assert.strictEqual(typeof data.string, 'string')
+    assert.strictEqual(typeof data.number, 'number')
+
+    assert.strictEqual(data.string, 'original-string')
+    assert.strictEqual(data.number, 999)
+  })
+
+  it('should be return value from map fields when missing original key', async () => {
+    const schema = {
+      string: { type: String, fields: ['s', 'st', 'str'] },
+      number: { type: Number, fields: 'num' }
+    }
+
+    const rawData = {
+      st: 'from-fields-st',
       num: 555
     }
 
