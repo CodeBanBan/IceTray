@@ -103,6 +103,85 @@ describe('IceTray Lib: Nested Schema', () => {
     assert.strictEqual(profile.age, 35)
   })
 
+  it('should be success with full option nested schema with manual field', async () => {
+    const schema = {
+      profile: {
+        fields: 'profile_manual',
+        name: {
+          firstName: {
+            type: String,
+            fields: ['name']
+          },
+          lastName: {
+            type: String,
+            default: 'default-lastname'
+          }
+        },
+        age: Number
+      }
+    }
+
+    const rawData = {
+      profile_manual: {
+        name: {
+          name: 'field-name'
+        },
+        age: '35'
+      }
+    }
+
+    const {profile} = IceTray(schema, rawData)
+
+    assert.strictEqual(profile.name.firstName, 'field-name')
+    assert.strictEqual(profile.name.lastName, 'default-lastname')
+    assert.strictEqual(profile.age, 35)
+  })
+
+  it('should be success with full option nested schema with default value', async () => {
+    const schema = {
+      account: {
+        fields: 'account_manual',
+        default: {
+          username: 'default-username',
+          password: 'default-password'
+        },
+        username: String,
+        password: String
+      },
+      profile: {
+        fields: 'profile_manual',
+        default: {
+          name: {
+            firstName: 'default-firstname',
+            lastName: 'default-lastname'
+          },
+          age: 999
+        },
+        name: {
+          firstName: String,
+          lastName: String
+        },
+        age: Number
+      }
+    }
+
+    const rawData = {
+      account_manual: {
+        username: 'raw-username',
+        password: 'raw-password'
+      }
+    }
+
+    const {account, profile} = IceTray(schema, rawData)
+
+    assert.strictEqual(account.username, 'raw-username')
+    assert.strictEqual(account.password, 'raw-password')
+
+    assert.strictEqual(profile.name.firstName, 'default-firstname')
+    assert.strictEqual(profile.name.lastName, 'default-lastname')
+    assert.strictEqual(profile.age, 999)
+  })
+
   it('should not return key when row data no key', async () => {
     const schema = {
       hobbies: [String],
