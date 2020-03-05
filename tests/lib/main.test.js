@@ -146,4 +146,45 @@ describe('IceTray Lib', () => {
     assert.strictEqual(dataList[1].string, 'string-1')
     assert.strictEqual(dataList[1].number, 1)
   })
+
+  it('should be return undefined when raw data is null', async () => {
+    const schema = {
+      string: String,
+      number: Number
+    }
+
+    const rawData = null
+
+    const data = IceTray(schema, rawData)
+
+    assert.strictEqual(data, undefined)
+  })
+
+  it('should be return undefined when raw data is undefined', async () => {
+    const schema = {
+      string: String,
+      number: Number
+    }
+
+    const rawData = undefined
+
+    const data = IceTray(schema, rawData)
+
+    assert.strictEqual(data, undefined)
+  })
+
+  it('should be return raw data when schema is null or undefined', async () => {
+    const undefinedSchema = undefined
+    const nullSchema = null
+
+    const rawData = {
+      a: 5
+    }
+
+    const dataByUndefinedSchema = IceTray(undefinedSchema, rawData)
+    assert.strictEqual(dataByUndefinedSchema.a, 5)
+
+    const dataByNullSchema = IceTray(nullSchema, rawData)
+    assert.strictEqual(dataByNullSchema.a, 5)
+  })
 })
