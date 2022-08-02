@@ -77,3 +77,60 @@ const nestedSchema = {
   }
 }
 ```
+
+#### JSON Data Type
+##### ==> Mode: Stringify
+```js
+const IceTray = require('icetray');
+const {JSON_MODE, Type} = IceTray
+
+// Create Data Schema
+const CatSchema = {
+  jsonData: Type.JSON,
+  dataList: Type.JSON
+}
+
+const rawData = {
+  jsonData: {
+    id: 1,
+    name: 'Garfield'
+  },
+  dataList: [1, 2, 3, 4, 5]
+}
+
+const cat = IceTray(CatSchema, rawData, JSON_MODE.STRINGIFY)
+/* 
+  cat = {
+    jsonData: '{"id":1,"name":"Garfield}',
+    dataList: '[1,2,3,4,5]'
+  }
+*/
+```
+
+##### ==> Mode: Parse
+```js
+const IceTray = require('icetray');
+const {JSON_MODE, Type} = IceTray
+
+// Create Data Schema
+const CatSchema = {
+  jsonData: Type.JSON,
+  dataList: Type.JSON
+}
+
+const rawData = {
+  jsonData: '{"id":1,"name":"Garfield"}',
+  dataList: '[1,2,3,4,5]'
+}
+
+const cat = IceTray(CatSchema, rawData, JSON_MODE.PARSE)
+/* 
+  cat = {
+    jsonData: {
+      id: 1,
+      name: "Garfield"
+    }',
+    dataList: [1, 2, 3, 4, 5]
+  }
+*/
+```
