@@ -48,7 +48,8 @@ const schema = {
   key2: {
     type: String,
     default: 'Default Value',
-    fields: ['map1', 'map2', 'map3']
+    fields: ['map1', 'map2', 'map3'],
+    allowNull: true
   }
 }
 ```

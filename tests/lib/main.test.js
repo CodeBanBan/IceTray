@@ -187,4 +187,43 @@ describe('IceTray Lib', () => {
     const dataByNullSchema = IceTray(nullSchema, rawData)
     assert.strictEqual(dataByNullSchema.a, 5)
   })
+
+  it('should be return null when is allow null', async () => {
+    const schema = {
+      string: { type: String, default: '', allowNull: true },
+      number: { type: Number, default: 0, allowNull: true  }
+    }
+
+    const data = IceTray(schema, {
+      string: null,
+      number: null
+    })
+
+    assert.strictEqual(data.string, null)
+    assert.strictEqual(data.number, null)
+  })
+
+  it('should be return default value when field is not set allow null', async () => {
+    const schema = {
+      a: { type: String, default: 'default-value', allowNull: true },
+      b: { type: String, default: 'default-value', allowNull: false },
+      c: { type: Number, default: 99999 },
+      d: { type: Number, default: 99999, allowNull: true },
+      x: { type: String, default: 99999, allowNull: true }
+    }
+
+    const data = IceTray(schema, {
+      a: null,
+      b: null,
+      c: null,
+      d: null,
+      x: 1111
+    })
+
+    assert.strictEqual(data.a, null)
+    assert.strictEqual(data.b, 'default-value')
+    assert.strictEqual(data.c, 99999)
+    assert.strictEqual(data.d, null)
+    assert.strictEqual(data.x, '1111')
+  })
 })
