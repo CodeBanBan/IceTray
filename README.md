@@ -79,6 +79,42 @@ const nestedSchema = {
 }
 ```
 
+#### Date Type
+```js
+const schema = {
+  key1: Type.DATE,
+  key2: Type.DATE,
+  key3: Type.DATE,
+  key4: {
+    type: Type.DATE,
+    allowNull: true
+  },
+  key5: {
+    type: Type.DATE,
+    allowNull: true
+  }
+}
+
+const rawData = {
+  key1: 1640995200000,  // 2022-01-01 00:00:00 UTC+0
+  key2: '2022-01-01 00:00:00 UTC+0',
+  key3: 'invalid format',
+  key4: 'invalid format',
+  key5: null
+}
+
+const result = Icetray(schema, rawData)
+/* Result Object
+{
+    key1: 2022-01-01T00:00:00.000Z // Date object
+    key2: 2022-01-01T00:00:00.000Z // Date object
+    key3: 1970-01-01T00:00:00.000Z // Date object
+    key4: null
+    key5: null
+}
+ */
+```
+
 #### JSON Data Type
 ##### ==> Mode: Stringify
 ```js

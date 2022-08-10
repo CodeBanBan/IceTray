@@ -2,6 +2,7 @@
 
 const assert = require('assert');
 const IceTray = require('../../lib/main')
+const Type = IceTray.Type
 
 describe('IceTray Lib', () => {
   it('should be success with true type in simple schema', async () => {
@@ -225,5 +226,67 @@ describe('IceTray Lib', () => {
     assert.strictEqual(data.c, 99999)
     assert.strictEqual(data.d, null)
     assert.strictEqual(data.x, '1111')
+  })
+
+  it('should be success with type date', async () => {
+    const MOCK_UNIX_TIME = 1640995200000 // 2022-01-01 00:00:00 UTC+0
+    const schema = {
+      key1: Type.DATE,
+      key2: Type.DATE,
+      key3: Type.DATE,
+      key4: Type.DATE,
+      key5: Type.DATE,
+      key6: Type.DATE,
+      key7: {
+        type: Type.DATE,
+        allowNull: true
+      },
+      key8: {
+        type: Type.DATE,
+        allowNull: true
+      },
+      key9: {
+        type: Type.DATE,
+        default: MOCK_UNIX_TIME
+      },
+      key10: {
+        type: Type.DATE,
+        default: MOCK_UNIX_TIME
+      }
+    }
+
+    const rawData = {
+      key1: MOCK_UNIX_TIME,  // 2022-01-01 00:00:00 UTC+0
+      key2: '2022-01-01 00:00:00 UTC+0',
+      key3: '',
+      key4: 'invalid format',
+      key5: undefined,
+      key6: null,
+      key7: '',
+      key8: 'invalid format',
+      key9: null,
+      key10: 'invalid format'
+    }
+
+    const data = IceTray(schema, rawData)
+
+    assert.strictEqual(data.key1 instanceof Date, true)
+    assert.strictEqual(data.key2 instanceof Date, true)
+    assert.strictEqual(data.key3 instanceof Date, true)
+    assert.strictEqual(data.key4 instanceof Date, true)
+    assert.strictEqual(data.key1.valueOf(), MOCK_UNIX_TIME)
+    assert.strictEqual(data.key2.valueOf(), MOCK_UNIX_TIME)
+    assert.strictEqual(data.key3.valueOf(), 0)
+    assert.strictEqual(data.key4.valueOf(), 0)
+
+    assert.strictEqual(data.key5, undefined)
+    assert.strictEqual(data.key6, undefined)
+    assert.strictEqual(data.key7, null)
+    assert.strictEqual(data.key8, null)
+
+    assert.strictEqual(data.key9 instanceof Date, true)
+    assert.strictEqual(data.key10 instanceof Date, true)
+    assert.strictEqual(data.key9.valueOf(), MOCK_UNIX_TIME)
+    assert.strictEqual(data.key10.valueOf(), 0)
   })
 })
