@@ -10,7 +10,11 @@ describe('IceTray Lib: JSON Type', () => {
   describe('=> Mode: Stringify', () => {
     it('should be convert object success', async () => {
       const schema = {
-        jsonData: Type.JSON
+        jsonData: Type.JSON,
+        keyNull: {
+          type: Type.JSON,
+          allowNull: true
+        }
       }
 
       const rawData = {
@@ -19,10 +23,12 @@ describe('IceTray Lib: JSON Type', () => {
           keyB: 'valueB',
           key9: 9
         },
+        keyNull: null
       }
 
       const data = IceTray(schema, rawData, JSON_MODE.STRINGIFY)
 
+      assert.strictEqual(data.keyNull, null)
       assert.strictEqual(typeof data.jsonData, 'string')
       assert.strictEqual(data.jsonData, '{"keyA":"valueA","keyB":"valueB","key9":9}')
     })
