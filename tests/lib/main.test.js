@@ -287,7 +287,6 @@ describe('IceTray Lib', () => {
     }
 
     const data = IceTray(schema, rawData)
-    console.log(data)
 
     assert.strictEqual(data.key1 instanceof Date, true)
     assert.strictEqual(data.key2 instanceof Date, true)
