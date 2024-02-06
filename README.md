@@ -37,12 +37,18 @@ const cat = IceTray(CatSchema, rawData)
 ```
 
 #### Simple Schema Design
+#### Key Reference
+- type `data type for this key`
+- default `default value`
+- fields `mapping key`
+- allowNull `true: allow this key is null`
+- trim `return trimmed data of key`
+
 ##### Type Support
 - String `return data type String`
 - Number `return data type Number`
 - Boolean `return data type Boolean`
 - 'default' `return raw data of key`
-- trim `return trimmed data of key`
 ```js
 const schema = {
   key1: String,
