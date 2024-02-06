@@ -16,14 +16,14 @@ const IceTray = require('icetray');
 const CatSchema = {
   id: Number,
   name: String,
-  age: Number
+  age: Number, 
 }
 
 const rawData = {
   id: '12345',
   name: 'Garfield',
   age: '3',
-  color: 'black'
+  color: 'black',
 }
 
 const cat = IceTray(CatSchema, rawData)
@@ -41,7 +41,8 @@ const cat = IceTray(CatSchema, rawData)
 - String `return data type String`
 - Number `return data type Number`
 - Boolean `return data type Boolean`
-- 'default' `return raw data of key` 
+- 'default' `return raw data of key`
+- trim `return trimmed data of key`
 ```js
 const schema = {
   key1: String,
@@ -50,7 +51,11 @@ const schema = {
     default: 'Default Value',
     fields: ['map1', 'map2', 'map3'],
     allowNull: true
-  }
+  },
+  key3: {
+    string: String,
+    trim: true  
+  }  
 }
 ```
 
