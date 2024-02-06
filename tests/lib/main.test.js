@@ -228,6 +228,24 @@ describe('IceTray Lib', () => {
     assert.strictEqual(data.x, '1111')
   })
 
+  it('should return trimmed value when field is set to trim', async () => {
+    const schema = {
+      a: { type: String, default: 'default-value', trim: true, },
+      b: { type: String, default: 'default-value', trim: false },
+      c: { type: String, default: 'default-value'},
+    }
+
+      const data = IceTray(schema, {
+        a: '      Should Trim     ',
+        b: 'NotTrim  ',
+        c: 'NotTrim  ',
+      })
+
+    assert.strictEqual(data.a, 'Should Trim')
+    assert.strictEqual(data.b, 'NotTrim  ')
+    assert.strictEqual(data.c, 'NotTrim  ')
+  })
+
   it('should be success with type date', async () => {
     const MOCK_UNIX_TIME = 1640995200000 // 2022-01-01 00:00:00 UTC+0
     const schema = {
@@ -269,6 +287,7 @@ describe('IceTray Lib', () => {
     }
 
     const data = IceTray(schema, rawData)
+    console.log(data)
 
     assert.strictEqual(data.key1 instanceof Date, true)
     assert.strictEqual(data.key2 instanceof Date, true)
