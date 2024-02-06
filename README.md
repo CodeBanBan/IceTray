@@ -16,14 +16,14 @@ const IceTray = require('icetray');
 const CatSchema = {
   id: Number,
   name: String,
-  age: Number, 
+  age: Number
 }
 
 const rawData = {
   id: '12345',
   name: 'Garfield',
   age: '3',
-  color: 'black',
+  color: 'black'
 }
 
 const cat = IceTray(CatSchema, rawData)
